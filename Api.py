@@ -10,12 +10,3 @@ another = firebase.post('/Results', {'prediction': str(predictedValue(lis)[0])})
 for key,value in result.items():
     print(value)
 
-with open('data_file.json', 'r') as fp:
-    obj = json.load(fp)
-    obj = json.loads("""{
-      "firstName": "Alice",
-      "lastName": "Hall",
-      "age": 35
-    }""")
-    firstName = obj["firstName"]
-    print(firstName)
