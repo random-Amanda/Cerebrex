@@ -1,140 +1,48 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[21]:
-
-
 import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import math
-get_ipython().run_line_magic('matplotlib', 'inline')
-import math
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
 
-sleep_data=pd.read_csv("Desktop/sleepdatasetone.csv")
+#get_ipython().run_line_magic('matplotlib', 'inline')
+
+sleep_data=pd.read_csv("sleepdatasetone.csv")
 sleep_data.head(10)
 
-
-# In[4]:
-
-
-sns.countplot(x="Sleeping",data =sleep_data)
-
-
-# In[5]:
-
+sns.countplot(x="Sleeping", data=sleep_data)
 
 sleep_data.isnull()
 
+x = sleep_data.drop("Sleeping", axis=1)
+y = sleep_data["Sleeping"]
 
-# In[6]:
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=1)
 
+logmodel = LogisticRegression(solver='lbfgs')
 
-x=sleep_data.drop("Sleeping",axis=1)
-y=sleep_data["Sleeping"]
+logmodel.fit(x_train, y_train)
 
+predictions = logmodel.predict(x_test)
 
-# In[7]:
+classification_report(y_test, predictions)
 
+confusion_matrix(y_test, predictions)
 
-from sklearn.model_selection import train_test_split
+accuracy_score(y_test, predictions)
 
 
-# In[12]:
 
+def predictedValue(dataList =[]):
 
-x_train,x_test,y_train,y_test= train_test_split(x,y,test_size=0.3,random_state=1)
-
-
-# In[9]:
-
-
-from sklearn.linear_model import LogisticRegression
-
-
-# In[10]:
-
-
-logmodel=LogisticRegression()
-
-
-# In[13]:
-
-
-logmodel.fit(x_train,y_train)
-
-
-# In[14]:
-
-
-predictions=logmodel.predict(x_test)
-
-
-# In[15]:
-
-
-from sklearn.metrics import classification_report
-
-
-# In[16]:
-
-
-classification_report( y_test,predictions)
-
-
-# In[17]:
-
-
-from sklearn.metrics import confusion_matrix
-
-
-# In[18]:
-
-
-confusion_matrix(y_test,predictions)
-
-
-# In[19]:
-
-
-from sklearn.metrics import accuracy_score
-
-
-# In[20]:
-
-
-accuracy_score(y_test,predictions)
-
-
-# In[22]:
-
-
-Xnew = [[2.79415228, 2.10495117]]
-
-
-# In[24]:
-
-
-ynew = logmodel.predict(Xnew)
-print("X=%s, Predicted=%s" % (Xnew, ynew))
-
-
-# In[25]:
-
-
-Xnewtwo = [[450.354,412.369]]
-
-
-# In[26]:
-
-
-ynewtwo = logmodel.predict(Xnewtwo)
-print("X=%s, Predicted=%s" % (Xnewtwo, ynewtwo))
-
-
-# In[ ]:
-
-
-
-
+    # Xnew = [[2.79415228, 2.10495117]]
+    Xnew=[dataList]
+    ynew = logmodel.predict(Xnew)
+    return ynew
