@@ -1,0 +1,25 @@
+{
+  "name": "cortex-starter",
+  "version": "1.0.0",
+  "description": "Emotiv Cortex Starter Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sam Gentle <sam@samgentle.com>",
+  "license": "CC0-1.0",
+  "dependencies": {
+    "@babel/core": "^7.4.4",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "ws": "^3.1.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.4.4",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-watch": "^7.0.0",
+    "nodemon": "^1.19.0"
+  }
+}
